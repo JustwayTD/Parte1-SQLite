@@ -1,10 +1,4 @@
-# Actividad: Elaborar una aplicación de línea de comandos en Python que sirva cuyo propósito sea mantener un diccionario de palabras 
-# del slang panameño (xopa, mopri, otras). Las palabras y su significado deben ser almacenadas dentro de una base de datos 
-# SQLite. Las opciones dentro del programa deben incluir como mínimo: 
-# a) Agregar nueva palabra, c) Editar palabra existente, d) Eliminar palabra existente, e) Ver listado de palabras,
-#  f) Buscar significado de palabra, g) Salir
 import sqlite3
-
 
 conn = sqlite3.connect('Slang.db')
 
@@ -44,26 +38,3 @@ def whatIsLove(babyDont):
     with conn:
         c.execute("SELECT * FROM slangs WHERE meaning = :meaning",{"meaning" :babyDont})
     return c.fetchall()
-
-if __name__=="__main__":
-    choo = menu()
-    if choo == 1:
-        palabra1 = input("Cual sera la palabra a agregar?\n")
-        palabra2 = input("Y que significa eso?\n")
-        agregar(palabra1,palabra2)
-    elif choo == 2:
-        palabra1 = input ("Cual palabra quieres editar?\n")
-        palabra2 = input("Cual sera el nuevo significado?\n")
-        editaMoh(palabra1,palabra2)
-    elif choo == 3:
-        palabra1 = input("Que palabra quieres eliminar?\n")
-        eliminaMoh(palabra1)
-    elif choo == 4:
-        palabras = urbanDic()
-        for palabras in palabras:
-            print(palabras)
-    elif choo == 5:
-        palabra1 = input("De que palabra quieres el significado (case sensitive)")
-        palabras = whatIsLove(palabra1)
-        for palabras in palabras:
-            print("Significa:", palabras)
